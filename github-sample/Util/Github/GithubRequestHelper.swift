@@ -51,7 +51,7 @@ fileprivate struct GithubRequestResource {
               let data = try? Data(contentsOf: secretFileURL) else {
             return String()
         }
-        return String(data: data, encoding: .utf8) ?? String()
+        return (String(data: data, encoding: .utf8) ?? String()).trimmingCharacters(in: .whitespacesAndNewlines)
     }()
     
     static let baseUrl = "https://api.github.com"
