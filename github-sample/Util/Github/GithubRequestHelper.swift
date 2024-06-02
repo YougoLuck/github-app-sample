@@ -47,14 +47,11 @@ fileprivate struct GithubRequestResource {
     }
     
     static let token =  {
-        guard let secretFileURL = Bundle.main.url(forResource: "test", withExtension: "env"),
-              let data = try? Data(contentsOf: secretFileURL),
-              let encodedStr = String(data: data, encoding: .utf8),
-              let decodedData = Data(base64Encoded: encodedStr) else {
+        guard let secretFileURL = Bundle.main.url(forResource: "token", withExtension: "env"),
+              let data = try? Data(contentsOf: secretFileURL) else {
             return String()
         }
-           
-        return String(data: decodedData, encoding: .utf8) ?? String()
+        return String(data: data, encoding: .utf8) ?? String()
     }()
     
     static let baseUrl = "https://api.github.com"
