@@ -45,7 +45,7 @@ fileprivate struct GithubRequestResource {
         static let value = "Bearer"
     }
     
-    static let token = "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"
+    static let token = "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"
     static let baseUrl = "https://api.github.com"
 }
 
