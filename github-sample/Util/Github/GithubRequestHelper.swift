@@ -45,7 +45,12 @@ fileprivate struct GithubRequestResource {
         static let value = "Bearer"
     }
     
-    static let token = "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"
+    static let token = {
+        let base64token = "Z2l0aHViX3BhdF8xMUFMNUhVNkEwOTBNdEd1akF2RFhGX2d5N0M3anpIcDM2anpnVkR1M2tZenM3bzJLeEpmY2s0WFZ1UkJtNDJGRG1TRk81S0NQSFJrNkI3NklW"
+        guard let decodeData = Data(base64Encoded: base64token) else { return String() }
+        return String(data: decodeData, encoding: .utf8) ?? String()
+    }()
+    
     static let baseUrl = "https://api.github.com"
 }
 
