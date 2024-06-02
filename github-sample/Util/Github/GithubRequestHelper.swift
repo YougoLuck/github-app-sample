@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CryptoKit
 
 enum GithubApiResponse<T> {
     case success(T)
@@ -45,10 +46,15 @@ fileprivate struct GithubRequestResource {
         static let value = "Bearer"
     }
     
-    static let token = {
-        let base64token = "Z2l0aHViX3BhdF8xMUFMNUhVNkEwOTBNdEd1akF2RFhGX2d5N0M3anpIcDM2anpnVkR1M2tZenM3bzJLeEpmY2s0WFZ1UkJtNDJGRG1TRk81S0NQSFJrNkI3NklW"
-        guard let decodeData = Data(base64Encoded: base64token) else { return String() }
-        return String(data: decodeData, encoding: .utf8) ?? String()
+    static let token =  {
+        guard let secretFileURL = Bundle.main.url(forResource: "test", withExtension: "env"),
+              let data = try? Data(contentsOf: secretFileURL),
+              let encodedStr = String(data: data, encoding: .utf8),
+              let decodedData = Data(base64Encoded: encodedStr) else {
+            return String()
+        }
+           
+        return String(data: decodedData, encoding: .utf8) ?? String()
     }()
     
     static let baseUrl = "https://api.github.com"
